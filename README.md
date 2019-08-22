@@ -44,55 +44,17 @@ You will need to have the following installed on the RPi to run the project:
 * PySerial
 
 ### Install
-All downloads a dropped to ~/downloads and all installs dropped to ~/install
-
-	mkdir ~/downloads
-	mkdir ~/install
-#### PyPy
-PyPy comes pre-installed on a Raspberry Pi with the raspian-image 2015-05-05. It comes with version 2.2.1 but we have to use version 4.0.0.
-For the update we have to download the latest version of PyPy, extract files and update paths.
-	
-	cd ~/downloads
-	wget https://bitbucket.org/pypy/pypy/downloads/pypy-4.0.1-linux-armhf-raspbian.tar.bz2
-	cd ~/install
-	tar xvjf ../downloads/pypy-4.0.1-linux-armhf-raspbian.tar.bz2
-	echo "export PATH=\${HOME}/install/pypy-4.0.1-linux-armhf-raspbian/bin:\${PATH}" >> ~/.profile
-	source ~/.profile
-
-#### pip
-	cd ~/downloads
-	wget https://bootstrap.pypa.io/get-pip.py
-	pypy get-pip.py
+	sudo apt-get update
+	sudo apt-get -y dist-upgrade
 	
 #### twisted
-	cd ~/downloads
-	wget https://pypi.python.org/packages/source/T/Twisted/Twisted-15.4.0.tar.bz2
-	cd ~/install
-	tar xvjf ../downloads/Twisted-15.4.0.tar.bz2
-
-##### Now we have to comment one line in the twisted-source-code
-	cd Twisted-15.4.0
-	nano setup.py
-	line 63 comment with a # -> -> #conditionalExtensions=getExtensions(),
-	Ctrl + O
-	Ctrl + X
-	pypy setup.py install
-
-#### PySerial
-	pip install pyserial
+	pip install twisted
 	
 #### Autobahn Framework
 	pip install autobahn
 	
-#### numpy
-for normal python use
-
-	pip install numpy
-
-we use pypy and under pypy we can't use the normal install method. [Source](http://pypy.org/download.html#installing-numpy)
-use the follwing line to isntall numpy with pypy
-
-	pypy -m pip install git+https://bitbucket.org/pypy/numpy.git
+#### service_identity
+	pip install service_identity
 
 #### Install usbmount, for automount usb-store
 	sudo apt-get install usbmount
@@ -106,22 +68,35 @@ Goto FS_MOUNTOPTIONS="" and change it to
 	Ctrl + X
 	sudo reboot
 	
-#### Crosbar.io (WAMP-Router)
-	sudo apt-get install build-essential libssl-dev libffi-dev python-dev
-	pip install crossbar
-	
 ### Checkout from github
 	cd ~/
 	git clone https://github.com/flashbac/gsv-6ToWAMP.git
-	
+
+#### Crossbar.io (WAMP-Router)
+	sudo apt-get install -y build-essential libssl-dev libffi-dev python-dev libsnappy-dev
+	sudo pip3 install -U cryptography
+	sudo pip3 install crossbar
+
+Reinstall numpy
+
+	sudo pip3 uninstall numpy
+	sudo pip3 install numpy
+
+Test crossbar
+
+	crossbar version
+	crossbar upgrade --cbdir /home/pi/gsv-6ToWAMP/.crossbar
+
 ### Set timezone
 	cd ~/
 	echo "TZ='Europe/Berlin';" >> ~/.profile
 	echo "export TZ" >> ~/.profile
 	source ~/.profile
 	
-### Create folder for csv-files
-	mkdir messungen
+### Create folder for csv-& log-files
+	mkdir ~/gsv-6ToWAMP/messungen/
+	mkdir ~/gsv-6ToWAMP/logs/
+
 	
 ### Run crossbar server
 	cd <projectname>
@@ -129,7 +104,8 @@ Goto FS_MOUNTOPTIONS="" and change it to
 	check with with the browser http://<ip>:8080 -> some information have to appear there
 	
 ### Run the serial2ws.py script
-	pypy serial2ws.py --baud=115200 --port=/dev/ttyAMA0
+	cd ~/gsv-6ToWAMP
+	/usr/bin/python serial2ws.py --baud=230400 --port=/dev/ttyAMA0
 	goto http://<ip>:8000
 
 ## Start crossbar and serial2ws at systemstart
@@ -150,7 +126,7 @@ from now on, you can start and stop crossbar and serial2ws via the deamon
 	sudo /etc/init.d/crossbar stop
 	
 	sudo /etc/init.d/serial2ws start
-	sudo /etc/init.d/serail2ws stop
+	sudo /etc/init.d/serial2ws stop
 	
 autostart for crossbar and serial2ws
 I use the rc.local for them. open /etc/rc.local
