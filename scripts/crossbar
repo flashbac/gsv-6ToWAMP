@@ -10,7 +10,6 @@
 # Description:       starts crossbar
 ### END INIT INFO
 
-pypy_dir=/home/pi/install/pypy-4.0.0-linux-armhf-raspbian/bin
 gsv6ToWamp_dir=/home/pi/gsv-6ToWAMP
 crossbar_init_log=/home/pi/gsv-6ToWAMP/logs/crossbar.init.log
 
@@ -21,13 +20,13 @@ echo -e "\n \n About to start crossbar \n " >> ${crossbar_init_log}
 case "$1" in
         start)
 				#cd ${gsv6ToWamp_dir}
-                ${pypy_dir}/crossbar ${1} --cbdir ${gsv6ToWamp_dir}/.crossbar >> ${crossbar_init_log} &
+                /usr/bin/python3 /usr/local/bin/crossbar ${1} --cbdir ${gsv6ToWamp_dir}/.crossbar >> ${crossbar_init_log} &
         ;;
         restart)
-                ${pypy_dir}/crossbar ${1} --cbdir ${gsv6ToWamp_dir}/.crossbar >> ${crossbar_init_log} &
+                /usr/bin/python3 /usr/local/bin/crossbar ${1} --cbdir ${gsv6ToWamp_dir}/.crossbar >> ${crossbar_init_log} &
         ;;
         stop)
-                ${pypy_dir}/crossbar ${1} --cbdir ${gsv6ToWamp_dir}/.crossbar >> ${crossbar_init_log}
+                /usr/bin/python3 /usr/local/bin/crossbar ${1} --cbdir ${gsv6ToWamp_dir}/.crossbar >> ${crossbar_init_log}
         ;;
         *)
                 echo "Usage: /etc/init.d/crossbar {start|stop|restart}"
