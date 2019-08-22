@@ -36,7 +36,7 @@ case "$1" in
         -b --make-pidfile \
         --chuid $USER \
 	    --chdir $gsv6ToWamp_dir \
-        --exec $DAEMON $DAEMONARGS
+        --exec /usr/bin/python serial2ws.py
         log_end_msg $?
         ;;
     stop)
