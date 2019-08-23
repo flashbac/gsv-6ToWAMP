@@ -43,6 +43,12 @@ You will need to have the following installed on the RPi to run the project:
 * AutobahnPython
 * PySerial
 
+## acivate I2C and serial port
+
+	sudo raspi-config
+	
+Go to interfacing options and enable SSH, I2C and Serial.
+
 ### Install
 	sudo apt-get update
 	sudo apt-get -y dist-upgrade
