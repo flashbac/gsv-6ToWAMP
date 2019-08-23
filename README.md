@@ -95,7 +95,7 @@ Goto FS_MOUNTOPTIONS="" and change it to
 #### service_identity
 	pip install service_identity	
 
-### Set timezone
+#### Set timezone
 	cd ~/
 	echo "TZ='Europe/Berlin';" >> ~/.profile
 	echo "export TZ" >> ~/.profile
@@ -120,7 +120,7 @@ add behind console=tty1: core_freq=250
 	Ctrl + O
 	Ctrl + X
 
-### Edit /boot/config.txt
+#### Edit /boot/config.txt
 
 	sudo nano /boot/config.txt
 
