@@ -43,7 +43,7 @@ You will need to have the following installed on the RPi to run the project:
 * AutobahnPython
 * PySerial
 
-## acivate I2C and serial port
+### acivate I2C and serial port
 
 	sudo raspi-config
 	
