@@ -55,15 +55,6 @@ Go to interfacing options and enable SSH, I2C and Serial.
 	sudo apt-get update
 	sudo apt-get -y dist-upgrade
 	
-#### twisted
-	pip install twisted
-	
-#### Autobahn Framework
-	pip install autobahn
-	
-#### service_identity
-	pip install service_identity
-
 #### Install usbmount, for automount usb-store
 	sudo apt-get install usbmount
 Change usbmount config
@@ -75,7 +66,7 @@ Goto FS_MOUNTOPTIONS="" and change it to
 	Ctrl + O
 	Ctrl + X
 	sudo reboot
-	
+
 ### Checkout from github
 	cd ~/
 	git clone https://github.com/flashbac/gsv-6ToWAMP.git
@@ -95,6 +86,15 @@ Test crossbar
 	crossbar version
 	crossbar upgrade --cbdir /home/pi/gsv-6ToWAMP/.crossbar
 
+#### twisted
+	pip install twisted
+	
+#### Autobahn Framework
+	pip install autobahn
+	
+#### service_identity
+	pip install service_identity	
+
 ### Set timezone
 	cd ~/
 	echo "TZ='Europe/Berlin';" >> ~/.profile
@@ -105,13 +105,8 @@ Test crossbar
 	mkdir ~/gsv-6ToWAMP/messungen/
 	mkdir ~/gsv-6ToWAMP/logs/
 
-	
-### Run crossbar server
-	cd <projectname>
-	crossbar start &
-	check with with the browser http://<ip>:8080 -> some information have to appear there
-	
-### Run the serial2ws.py script
+### Run crossbar server and the serial2ws.py script
+	/usr/bin/python3 /usr/local/bin/crossbar start --cbdir /home/pi/gsv-6ToWAMP/.crossbar
 	cd ~/gsv-6ToWAMP
 	/usr/bin/python serial2ws.py --baud=230400 --port=/dev/ttyAMA0
 	goto http://<ip>:8000
