@@ -67,7 +67,7 @@ Goto FS_MOUNTOPTIONS="" and change it to
 	Ctrl + X
 	sudo reboot
 
-### Checkout from github
+#### Checkout from github
 	cd ~/
 	git clone https://github.com/flashbac/gsv-6ToWAMP.git
 
@@ -101,16 +101,16 @@ Test crossbar
 	echo "export TZ" >> ~/.profile
 	source ~/.profile
 	
-### Create folder for csv-& log-files
+#### Create folder for csv-& log-files
 	mkdir ~/gsv-6ToWAMP/messungen/
 	mkdir ~/gsv-6ToWAMP/logs/
 
-### Stop and disable ttyS0.service
+#### Stop and disable ttyS0.service
 
 	sudo systemctl stop serial-getty@ttyS0.service
 	sudo systemctl disable serial-getty@ttyS0.service
 
-### Edit /boot/cmdline.txt
+#### Edit /boot/cmdline.txt
 
 	sudo nano /boot/cmdline.txt
 
