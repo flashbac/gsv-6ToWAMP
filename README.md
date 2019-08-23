@@ -76,12 +76,12 @@ Goto FS_MOUNTOPTIONS="" and change it to
 	sudo pip3 install -U cryptography
 	sudo pip3 install crossbar
 
-Reinstall numpy
+#### Reinstall numpy
 
 	sudo pip3 uninstall numpy
 	sudo pip3 install numpy
 
-Test crossbar
+#### Test crossbar
 
 	crossbar version
 	crossbar upgrade --cbdir /home/pi/gsv-6ToWAMP/.crossbar
@@ -133,7 +133,7 @@ add on the bottom
 	Ctrl + O
 	Ctrl + X
 
-sudo reboot
+	sudo reboot
 
 
 
