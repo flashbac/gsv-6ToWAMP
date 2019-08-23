@@ -49,6 +49,8 @@ You will need to have the following installed on the RPi to run the project:
 	
 Go to interfacing options and enable SSH, I2C and Serial.
 
+	sudo reboot now
+
 ### Install
 	sudo apt-get update
 	sudo apt-get -y dist-upgrade
