@@ -105,6 +105,38 @@ Test crossbar
 	mkdir ~/gsv-6ToWAMP/messungen/
 	mkdir ~/gsv-6ToWAMP/logs/
 
+### Stop and disable ttyS0.service
+
+	sudo systemctl stop serial-getty@ttyS0.service
+	sudo systemctl disable serial-getty@ttyS0.service
+
+### Edit /boot/cmdline.txt
+
+	sudo nano /boot/cmdline.txt
+
+remove: console=serial0,115200b 
+add behind console=tty1: core_freq=250
+
+	Ctrl + O
+	Ctrl + X
+
+### Edit /boot/config.txt
+
+	sudo nano /boot/config.txt
+
+add on the bottom
+
+	dtoverlay=pi3-miniuart-bt
+	enable_uart=1
+	force_turbo=1
+
+	Ctrl + O
+	Ctrl + X
+
+sudo reboot
+
+
+
 ### Run crossbar server and the serial2ws.py script
 	/usr/bin/python3 /usr/local/bin/crossbar start --cbdir /home/pi/gsv-6ToWAMP/.crossbar
 	cd ~/gsv-6ToWAMP
